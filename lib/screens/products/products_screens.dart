@@ -14,6 +14,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
       appBar: AppBar(
         title: Text("Products"),
       ),
+      body: Column(
+        children: [
+          Text("wekjfnkjwenfk")
+        ],
+      ),
     );
   }
 }
