@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const primary = Color(0xFF7E57C2);
@@ -13,9 +14,9 @@ class AppColors {
       backgroundColor: primary,
       foregroundColor: Colors.black,
     ),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: Colors.black), // AppBar title color
-      bodyMedium: TextStyle(color: Colors.black87), // Body text color
+    textTheme:   TextTheme(
+      titleLarge: GoogleFonts.inter(color: Colors.black), // AppBar title color
+      bodyMedium: GoogleFonts.inter(color: Colors.black87), 
     ),
   );
 
@@ -28,9 +29,9 @@ class AppColors {
       backgroundColor: primary,
       foregroundColor: Colors.white,
     ),
-    textTheme: const TextTheme(
-      titleLarge: TextStyle(color: Colors.white), // AppBar title color
-      bodyMedium: TextStyle(color: Colors.white70), // Body text color
+    textTheme:   TextTheme(
+       titleLarge: GoogleFonts.inter(color: Colors.black),  
+      bodyMedium: GoogleFonts.inter(color: Colors.black87),
     ),
     // You can add more dark theme colors if needed
   );

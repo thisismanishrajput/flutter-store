@@ -27,7 +27,7 @@ class PrimaryButton extends StatelessWidget {
         height: height ?? 44,
         decoration: BoxDecoration(
             color:color,
-            borderRadius:const BorderRadius.all(Radius.circular(5))),
+            borderRadius:const BorderRadius.all(Radius.circular(10))),
         child: Center(
           child: Text(
             title
