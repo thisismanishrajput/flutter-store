@@ -1,81 +1,68 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/common/utils/colors.dart';
+import 'package:flutter_ecommerce/common/utils/constant.dart';
 import 'package:flutter_ecommerce/common/utils/fade_page_route.dart';
-import 'package:flutter_ecommerce/models/products/brand_model.dart';
 import 'package:flutter_ecommerce/models/products/product_model.dart';
 import 'package:flutter_ecommerce/providers/products/products_repository.dart';
 import 'package:flutter_ecommerce/screens/products/product_details_screen.dart';
 import 'package:provider/provider.dart';
 
-class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<ProductsScreen> createState() => _ProductsScreenState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _ProductsScreenState extends State<ProductsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<ProductRepository>(context, listen: false).brands(context: context);
-      Provider.of<ProductRepository>(context, listen: false).fetchProducts(context: context);
-    });
-  }
-
+class _SearchPageState extends State<SearchPage> {
+  TextEditingController _searchController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Products"),
-        backgroundColor: COLORS.primary,
-      ),
-      body: Consumer<ProductRepository>(
-        builder: (context, provider, child) {
-          return Padding(
-            padding: const EdgeInsets.only(left: 18.0,right: 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-               const SizedBox(height: 20,),
-                const Text("Shop by category",style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500
-                ),),
-               const SizedBox(height:8,),
-                  SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: 60,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: provider.brandList.length,
-                      itemBuilder: (context,index){
-                      Brand brand = provider.brandList[index];
-                      return Row(
-                        children: [
-                          Container(
-                            width: 100,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                              color:Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(child: Text(brand.name)),
-                          ),
-                        ],
-                      );
-
-                  }),
+    return SafeArea(
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(left: 18.0,right: 18,top: 10),
+          child: Column(
+            children: [
+              Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: BorderRadius.circular(50)
                 ),
-                const SizedBox(height:12,),
-               const  Text("Recommended for you",style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500
-                ),),
-                const SizedBox(height:12,),
-                Expanded(
+                child:   TextField(
+                  controller: _searchController,
+                  onChanged: (val){
+                    if(val.isEmpty || _searchController.text.isEmpty){
+                      Provider.of<ProductRepository>(context,listen: false).clearData();
+                    }else{
+                      Provider.of<ProductRepository>(context,listen: false).searchProduct(query: val);
+                    }
+
+                  },
+                  decoration:InputDecoration(
+                    border: InputBorder.none,
+                    filled: true,
+                    fillColor: Colors.white12,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 13.0, horizontal: 15),
+                    enabledBorder:const OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent, width: 0.5),
+                      borderRadius: BorderRadius.all(Radius.circular(35.0)),
+                    ),
+                    focusedBorder:  const  OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.transparent, width: 0.5),
+                      borderRadius: BorderRadius.all(Radius.circular(35.0)),
+                    ),
+                    hintText: "Search here..",
+                      hintStyle: AppTheme.hintStyle(context).copyWith(color: Theme.of(context).textTheme.headlineMedium!.color)
+                  ),
+                ),
+              ),
+              Consumer<ProductRepository>(
+                builder: (context, provider, child) {
+                return  Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
                     gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
@@ -83,18 +70,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       crossAxisSpacing: 12.0,
                       childAspectRatio: .66,
                     ),
-                    itemCount: provider.productList.length,
+                    itemCount: provider.searchedProductList.length,
                     itemBuilder: (context, index) {
-                      Product product = provider.productList[index];
+                      Product product = provider.searchedProductList[index];
                       return productCard(product);
-                  
+
                     },
                   ),
-                )
-              ],
-            ),
-          );
-        },
+                );
+                },
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -8,7 +8,7 @@ class PrimaryButton extends StatelessWidget {
     required this.press,
     this.width,
     this.height,
-    this.color = AppColors.primary,
+    this.color =COLORS.primary,
     this.margin = const EdgeInsets.all(8.0), // Adjust margin as needed
   }) : super(key: key);
 
@@ -30,7 +30,8 @@ class PrimaryButton extends StatelessWidget {
             borderRadius:const BorderRadius.all(Radius.circular(10))),
         child: Center(
           child: Text(
-            title
+            title,
+            style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500 ),
           ),
         ),
       ),
@@ -45,7 +46,7 @@ class PrimaryOutlineButton extends StatelessWidget {
     required this.press,
     this.width,
     this.height,
-    this.color = AppColors.primary,
+    this.color = COLORS.primary,
     this.margin = const EdgeInsets.all(8.0), // Adjust margin as needed
   }) : super(key: key);
 
@@ -64,13 +65,14 @@ class PrimaryOutlineButton extends StatelessWidget {
         height: height ?? 44,
         decoration: BoxDecoration(
           border: Border.all(
-            color: color ?? AppColors.primary,
+            color: color ?? COLORS.dashboardTileStripTextColor,
             width: 1.5
             ),
-          borderRadius:const BorderRadius.all(Radius.circular(5))),
+          borderRadius:const BorderRadius.all(Radius.circular(10))),
         child: Center(
           child: Text(
-            title
+            title,
+            style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500 ),
           ),
         ),
       ),

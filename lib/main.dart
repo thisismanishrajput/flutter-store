@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/common/utils/colors.dart';
+import 'package:flutter_ecommerce/common/utils/theme_constants.dart';
+import 'package:flutter_ecommerce/providers/auth/auth_provider.dart';
+import 'package:flutter_ecommerce/providers/auth/auth_repository.dart';
+import 'package:flutter_ecommerce/providers/products/product_services.dart';
+import 'package:flutter_ecommerce/providers/products/products_repository.dart';
+import 'package:flutter_ecommerce/screens/auth/landing_page.dart';
 import 'package:flutter_ecommerce/screens/auth/login_screen.dart';
-import 'package:flutter_ecommerce/screens/products/products_screens.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +18,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: AppColors.lightTheme,
-      home: const LoginScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthRepository>(create: (_) => AuthServices()),
+        ChangeNotifierProvider<ProductRepository>(create: (_) => ProductServices()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: lightTheme,
+        home: const LandingPage(),
+      ),
     );
   }
 }
