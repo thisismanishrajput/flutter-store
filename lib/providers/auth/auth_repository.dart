@@ -7,4 +7,6 @@ abstract class AuthRepository  extends ChangeNotifier{
       {required BuildContext context,
         required String email,
         required String pass});
+
+  Future<void> logout(BuildContext context);
 }

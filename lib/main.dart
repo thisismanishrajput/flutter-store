@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/common/utils/colors.dart';
 import 'package:flutter_ecommerce/common/utils/theme_constants.dart';
+import 'package:flutter_ecommerce/providers/account/profile_repository.dart';
+import 'package:flutter_ecommerce/providers/account/profile_services.dart';
 import 'package:flutter_ecommerce/providers/auth/auth_provider.dart';
 import 'package:flutter_ecommerce/providers/auth/auth_repository.dart';
 import 'package:flutter_ecommerce/providers/products/product_services.dart';
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<AuthRepository>(create: (_) => AuthServices()),
         ChangeNotifierProvider<ProductRepository>(create: (_) => ProductServices()),
+        ChangeNotifierProvider<ProfileRepository>(create: (_) => ProfileServices()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

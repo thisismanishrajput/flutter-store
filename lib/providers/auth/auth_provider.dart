@@ -28,7 +28,6 @@ class AuthServices extends ChangeNotifier implements AuthRepository{
   @override
   Future<void> login({required BuildContext context, required String email,required String pass})async {
     try {
-print("Login called");
       Map<String, dynamic> data ={
         "email":"manish@wearetechtonic.com",
         "password":"Test@123"
@@ -63,5 +62,23 @@ print("Login called");
       print("error");
 
     }
+  }
+
+  @override
+  Future<void> logout(BuildContext context) async {
+
+    final manager = await SharedPreferencesManager.getInstance();
+    await manager!.clearKey(
+      SharedPreferencesManager.accessToken,
+    );
+    await manager.clearKey(
+      SharedPreferencesManager.refreshToken,
+    );
+    await manager.clearKey(
+      SharedPreferencesManager.expiryTimeAccessToken,
+    );
+    await manager.clearKey(
+      SharedPreferencesManager.expiryTimeRefreshToken,
+    );
   }
 }

@@ -64,6 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             FadeInUp(
                 delay:const Duration(milliseconds: 300),
                 child:const Text("Description",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),)),
+
             FadeInUp(
                 delay:const Duration(milliseconds: 300),
                 child: Text(widget.product.description,style: const TextStyle(fontWeight: FontWeight.w400,fontSize: 14),)),

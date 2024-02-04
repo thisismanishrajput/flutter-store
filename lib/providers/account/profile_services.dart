@@ -23,7 +23,7 @@ class ProfileServices extends ProfileRepository {
   Future<void> profile(BuildContext context)async {
     try {
       _isProfileLoading = true;
-      final accessToken = Provider.of<AuthRepository>(context,listen: false).getAccessToken(context);
+      final accessToken = await Provider.of<AuthRepository>(context,listen: false).getAccessToken(context);
 
       var response = await _dio.get(
         Api.userProfile(),

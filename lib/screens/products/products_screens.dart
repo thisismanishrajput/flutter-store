@@ -34,6 +34,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
       ),
       body: Consumer<ProductRepository>(
         builder: (context, provider, child) {
+          if(provider.isBrandLoading || provider.isProductLoading){
+            return Center(child: CircularProgressIndicator(color: COLORS.primary,),);
+          }
           return Padding(
             padding: const EdgeInsets.only(left: 18.0,right: 18),
             child: Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/common/utils/colors.dart';
+import 'package:flutter_ecommerce/screens/account/user_profile.dart';
 import 'package:flutter_ecommerce/screens/products/products_screens.dart';
 import 'package:flutter_ecommerce/screens/search/search_page.dart';
 
@@ -22,7 +23,7 @@ class _HomeState extends State<Home> {
       body: <Widget>[
         ProductsScreen(),
         SearchPage(),
-        ProductsScreen(),
+        ProfileScreen()
       ][currentPageIndex],
     );
   }
