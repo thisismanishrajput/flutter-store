@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final brandModel = brandModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 BrandModel brandModelFromJson(String str) => BrandModel.fromJson(json.decode(str));

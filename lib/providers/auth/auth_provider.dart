@@ -28,7 +28,7 @@ class AuthServices extends ChangeNotifier implements AuthRepository{
   @override
   Future<void> login({required BuildContext context, required String email,required String pass})async {
     try {
-
+print("Login called");
       Map<String, dynamic> data ={
         "email":"manish@wearetechtonic.com",
         "password":"Test@123"
@@ -59,7 +59,8 @@ class AuthServices extends ChangeNotifier implements AuthRepository{
       }
 
     } on DioException catch (e) {
-print(e);
+      print(e);
+      print("error");
 
     }
   }
