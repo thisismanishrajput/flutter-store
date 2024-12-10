@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("qedbwqkfwef");
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthRepository>(create: (_) => AuthServices()),
